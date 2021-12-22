@@ -22,7 +22,7 @@ class UserBase(BaseModel):
     user_id: UUID = Field(...)
     email: EmailStr = Field (...)
 
-class UserLogin(UserBase):
+class Passwords(BaseModel):
     password: str = Field (..., min_length=8, max_length=64)
 
 class User(UserBase):
@@ -49,6 +49,11 @@ class tweet(BaseModel):
     updated_at : Optional[datetime] = Field(default=None)
     by: User = Field(...) 
 
+class UserLogin(UserBase, Passwords):
+    pass
+
+class UserRegister(UserBase, Passwords):
+    pass
 
 
 #Path Operations
@@ -70,7 +75,22 @@ def home():
     tags= ["Users"]
 )
 def signup():
-    pass
+    """
+    Signup
+
+    This path operation register a user in the app
+
+    Parameters:
+    - Request body parameter:
+        - user: UserRegister
+
+    Returns a JSON with basic user's information:
+    - user_id: UUID
+    - email: Emailstr
+    - first_name: str
+    - last_name: str
+    - birth_date: str
+    """
 
 ### Login a user
 @app.post(
