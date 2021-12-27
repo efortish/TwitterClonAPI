@@ -113,6 +113,20 @@ def login(
     email: EmailStr = Form(...),
     password: str = Form(...)
 ):
+    """
+    Login a user
+
+    This path Operations login a user in the app based on users.json file wich contains user's data,
+    it also verifies if the information is the same to do a login succesfully 
+
+    Parameters:
+    - Request Body parameter:
+        - email : EmailStr
+        - password: str
+    
+    Returns a message "Done!" if the authentication is ok, or returns "Unsuccesfully authentication!" if it has no coincidence
+
+    """
     with open("users.json", "r+", encoding="utf-8") as f: 
         datos = list(json.loads(f.read()))
         for user in datos:
