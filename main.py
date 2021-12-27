@@ -3,7 +3,7 @@ from uuid import UUID
 from datetime import date, datetime
 from typing import Optional, List
 import json
-from fastapi.param_functions import Form
+from fastapi.param_functions import Form, Path
 
 #Pydantic
 
@@ -176,8 +176,33 @@ def show_all_users():
     summary= "Show a User",
     tags= ["Users"]
 )
-def show_a_user():
-    pass
+def show_a_user(
+    user_id: str = Path (
+    ...,
+    min_length=1,
+    example= "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    )
+):
+    """
+    Show a user by ID
+
+    This path operation shows a user by ID
+
+    Parameters:
+    - Request body parameter:
+        - **user_id**: str 
+    
+    Returns a json with the user's information: first_name, last_name, email, user_id, date_of_birth
+    
+    """
+
+    with open ("users.json", "r", encoding="utf-8") as f:
+        results = list(json.loads(f.read()))
+        for user in results:
+            if user_id == user["user_id"]:
+                user = dict(user)
+                return user
+    
 
 ### Delete a user
 @app.delete(
