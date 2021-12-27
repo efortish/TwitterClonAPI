@@ -14,6 +14,14 @@
         "first_name": "kev",
         "last_name": "sua",
         "birth_date": "2021-12-22"
+    },
+    {
+        "password": "holakev123",
+        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa9",
+        "email": "kev@example.com",
+        "first_name": "kevaaaa",
+        "last_name": "suakkkkk",
+        "birth_date": "2021-12-22"
     }
     
 ]

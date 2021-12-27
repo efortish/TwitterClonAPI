@@ -15,6 +15,7 @@ from pydantic import Field
 #FastAPI
 from fastapi import FastAPI, status, Body
 from pydantic.types import SecretStr
+from fastapi import HTTPException
 
 
 app = FastAPI()
@@ -73,7 +74,9 @@ class LoginOut(BaseModel):
     summary= "Register a User",
     tags= ["Users"]
 )
-def signup(user: UserRegister = Body(...) ):
+def signup(
+    user: UserRegister = Body(...) 
+):
     """
     Signup
 
@@ -132,6 +135,7 @@ def login(
         for user in datos:
             if email == user["email"] and password == user["password"]:
                 return LoginOut(email=email, message="Done!")
+            
         
         return LoginOut(email=email, message= "Unsuccesfully authentication!")
             
@@ -202,6 +206,22 @@ def show_a_user(
             if user_id == user["user_id"]:
                 user = dict(user)
                 return user
+        
+        if user_id != user["user_id"]:
+            raise HTTPException(
+            status_code= status.HTTP_404_NOT_FOUND,
+            detail= "This user does not exist!")
+                   
+            
+                
+            
+                
+
+                
+            
+        
+        
+                
     
 
 ### Delete a user
