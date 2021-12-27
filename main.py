@@ -1,4 +1,5 @@
 #Python
+from os import path
 from uuid import UUID
 from datetime import date, datetime
 from typing import Optional, List
@@ -61,6 +62,11 @@ class UserRegister(User, Passwords):
 class LoginOut(BaseModel): 
     email: EmailStr = Field(...)
     message: str = Field(default=None)
+
+class DeleteUser(BaseModel):
+    user_id: UUID = Field (...)
+    message: str = Field (default= "User Deleted")
+
 
 #Path Operations
 
@@ -213,27 +219,56 @@ def show_a_user(
             detail= "This user does not exist!")
                    
             
-                
-            
-                
-
-                
-            
-        
-        
-                
     
 
 ### Delete a user
 @app.delete(
     path="/users/{user_id}/delete",
-    response_model= User,
-    status_code= status.HTTP_200_OK,
+    response_model= DeleteUser,
+    status_code= status.HTTP_202_ACCEPTED,
     summary= "Delete a User",
     tags= ["Users"]
 )
-def delete_a_user():
-    pass
+def delete_a_user(
+    user_id: str = Path(
+        ...
+        
+    )
+):
+
+    """
+    Delete a user
+
+    This path operation deletes a user 
+
+    Parameters:
+    - Request Body Parameters:
+        - user_id: str
+    
+    Returns a json saying the user provided was succesfully deleted, if the user does not exists, the json will show it up to you
+    
+    
+    
+    """
+
+    with open ("users.json", "r+", encoding="utf-8") as f:
+        results = list(json.loads(f.read()))
+        for user in results:
+            if user["user_id"] == user_id:
+                results.remove(user)
+                with open("users.json", "w", encoding="utf-8") as f:
+                    f.seek(0)
+                    f.write(json.dumps(results))
+                return user
+    if 1==1:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="¡This user_id doesn't exist!"
+        )
+            
+                
+            
+    
 
 ### Update a user
 @app.put(
