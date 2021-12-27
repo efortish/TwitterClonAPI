@@ -124,7 +124,7 @@ def login(
         - email : EmailStr
         - password: str
     
-    Returns a message "Done!" if the authentication is ok, or returns "Unsuccesfully authentication!" if it has no coincidence
+    Returns a message "Done!" if the authentication is ok, or returns "Unsuccesfully authentication!" if it has no coincidence, both cases returns the user's email as a response
 
     """
     with open("users.json", "r+", encoding="utf-8") as f: 
