@@ -3,6 +3,7 @@ from uuid import UUID
 from datetime import date, datetime
 from typing import Optional, List
 import json
+from fastapi.param_functions import Form
 
 #Pydantic
 
@@ -13,6 +14,7 @@ from pydantic import Field
 
 #FastAPI
 from fastapi import FastAPI, status, Body
+from pydantic.types import SecretStr
 
 
 app = FastAPI()
@@ -55,15 +57,11 @@ class UserLogin(UserBase, Passwords):
 
 class UserRegister(User, Passwords):
     pass
-
+class LoginOut(BaseModel): 
+    email: EmailStr = Field(...)
+    message: str = Field(default=None)
 
 #Path Operations
-
-@app.get(path="/")
-def home():
-    return {
-        "Twitter API": "Working!"
-    }
 
 ## Users
 
@@ -106,13 +104,26 @@ def signup(user: UserRegister = Body(...) ):
 ### Login a user
 @app.post(
     path="/login",
-    response_model= User,
+    response_model= LoginOut,
     status_code= status.HTTP_200_OK,
     summary= "Login a User",
     tags= ["Users"]
 )
-def login():
-    pass
+def login(
+    email: EmailStr = Form(...),
+    password: str = Form(...)
+):
+    with open("users.json", "r+", encoding="utf-8") as f: 
+        datos = list(json.loads(f.read()))
+        for user in datos:
+            if email == user["email"] and password == user["password"]:
+                return LoginOut(email=email, message="Done!")
+        
+        return LoginOut(email=email, message= "Unsuccesfully authentication!")
+            
+            
+
+    
 
 ### Show all user
 @app.get(
@@ -189,9 +200,26 @@ def update_a_user():
 
     )
 def home():
-    return {
-        "Twitter API": "Working!"
-    }
+    """
+    Show all tweets
+
+    This path operation shows all tweets posted in the app
+
+    Parameters:
+    - Request Body parameter:
+        - tweet: tweet
+
+    Returns a json file with all tweets in the app, with following keys
+    - tweet_id: UUID
+    - content: str 
+    - created_at : datetime 
+    - updated_at : Optional[datetime] 
+    - by: User
+
+    """
+    with open ("tweets.json", "r", encoding="utf-8") as f:
+        results = json.loads(f.read())
+        return results
 
 ### Post a Tweet
 @app.post(
