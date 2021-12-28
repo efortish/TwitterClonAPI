@@ -16,12 +16,11 @@
         "birth_date": "2021-12-22"
     },
     {
-        "password": "holakev123",
         "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "email": "kev@example.com",
-        "first_name": "kev",
-        "last_name": "sua",
-        "birth_date": "2021-12-22"
+        "email": "juancarlos@gmail.com",
+        "first_name": "Juan Camilo Canelo Carlos",
+        "last_name": "Smith",
+        "birth_date": "2021-12-28"
     },
     {
         "password": "holakev123",
@@ -31,5 +30,4 @@
         "last_name": "suakkkkk",
         "birth_date": "2021-12-22"
     }
-    
 ]

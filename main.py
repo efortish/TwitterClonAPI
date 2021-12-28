@@ -278,8 +278,28 @@ def delete_a_user(
     summary= "Update a User",
     tags= ["Users"]
 )
-def update_a_user():
-    pass
+def update_a_user(
+    user_id: UUID = Path(...),
+    user: User = Body (...)
+):  
+    user_id = str(user_id)
+    user_dict = user.dict()
+    user_dict["user_id"] = str(user_dict["user_id"])
+    user_dict["birth_date"] = str(user_dict["birth_date"])
+    
+    with open("users.json", "r+", encoding="utf-8") as f: 
+        results = list(json.loads(f.read()))
+        for user in results:
+            if user["user_id"] == user_id:
+                results[results.index(user)] = user_dict
+                with open("users.json", "w", encoding="utf-8") as f:
+                    f.seek(0)
+                    f.write(json.dumps(results))
+                return user
+    
+
+    
+    
     
 
 ## Tweets
