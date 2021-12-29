@@ -396,8 +396,37 @@ def post_a_tweet(tweet: tweet = Body(...)):
     summary= "Show a Tweet",
     tags= ["Tweets"]
 )
-def show_a_tweet():
-    pass
+def show_a_tweet(tweet_id:str=Path(...)):
+    """
+    Show a tweet by ID
+
+    This path operation shows a tweet by ID
+
+    Parameters:
+    - Request body parameter:
+        - **user_id**: str 
+    
+    Returns a json with the user's information: first_name, last_name, email, user_id, date_of_birth
+    
+    """
+
+    with open ("tweets.json", "r+", encoding="utf-8") as f:
+        # tweet_dict = dict(tweet_id)
+        # tweet_dict["tweet_id"] = str(tweet_dict["tweet_id"])
+        # tweet_dict["created_at"] = str(tweet_dict["created_at"])
+        # tweet_dict["updated_at"] = str(tweet_dict["updated_at"])
+        # tweet_dict["by"]["user_id"] = str (tweet_dict["by"]["user_id"])
+        # tweet_dict["by"]["birth_date"] = str (tweet_dict["by"]["birth_date"])
+        results = list(json.loads(f.read()))
+        for tw in results:
+            if tw["tweet_id"] == tweet_id:
+                tw = dict(tw)
+                return tw
+        
+        if tw["tweet_id"] != tweet_id:
+            raise HTTPException(
+            status_code= status.HTTP_404_NOT_FOUND,
+            detail= "This tweet does not exist!")
 
 ### Delete a tweet
 @app.delete(
