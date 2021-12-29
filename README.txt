@@ -10,7 +10,7 @@ tweets.json).
 			 uvicorn main:app --reload        #This launches the application.
 	- Go to 127.0.0.1:8000 in your navigator (Google Chrome recomended):
 		- 127.0.0.1:8000/docs : To use Swagger UI.
-		- 127.0.0.1:8000/redoc: To user Redoc UI. 
+		- 127.0.0.1:8000/redoc: To use Redoc UI. 
 
 - Open users.json and tweets.json and play with the API as long you want.
 
