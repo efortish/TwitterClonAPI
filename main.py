@@ -476,8 +476,39 @@ def delete_a_tweet(tweet_id:str=Path(...)):
     summary= "Update a Tweet",
     tags= ["Tweets"]
 )
-def Update_a_tweet():
-    pass
+def Update_a_tweet(
+    tweet_id:str=Path(...), 
+    tweet:tweet=Body(...)
+    ):
+    """
+    Update a Tweet
+
+    This path operation updates tweet's information, even the user ID
+
+    Parameters:
+    - Response Body parameters:
+        - tweet: User -> User object wich contains first_name, last_name, date_of_birth, used_id and email
+
+    Returns a Json with User Json information with the new data given, sometimes its necesary do the execute twice to work  
+    
+    """
+    tweet_id = str(tweet_id)
+    tweet_dict = tweet.dict()
+    tweet_dict["tweet_id"] = str(tweet_dict["tweet_id"])
+    tweet_dict["created_at"] = str(tweet_dict["created_at"])
+    tweet_dict["updated_at"] = str(tweet_dict["updated_at"])
+    tweet_dict["by"]["user_id"] = str (tweet_dict["by"]["user_id"])
+    tweet_dict["by"]["birth_date"] = str (tweet_dict["by"]["birth_date"])
+    
+    with open("tweets.json", "r+", encoding="utf-8") as f: 
+        results = list(json.loads(f.read()))
+        for tweet in results:
+            if tweet["tweet_id"] == tweet_id:
+                results[results.index(tweet)] = tweet_dict
+                with open("tweets.json", "w", encoding="utf-8") as f:
+                    f.seek(0)
+                    f.write(json.dumps(results))
+                return tweet
 
 
 

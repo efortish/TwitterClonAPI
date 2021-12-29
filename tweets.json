@@ -14,15 +14,15 @@
     },
     {
         "tweet_id": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
-        "content": "Hi, this is my second tweet here ",
-        "created_at": "2021-12-26 10:59:21.752903",
-        "updated_at": "2021-12-26 16:01:37.711000+00:00",
+        "content": "Im updating this tweet",
+        "created_at": "2021-12-28 21:35:51.322352",
+        "updated_at": "2021-12-29 02:45:48.858000+00:00",
         "by": {
             "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "email": "keeev@example.com",
-            "first_name": "karina",
+            "email": "juanillo@example.com",
+            "first_name": "juan",
             "last_name": "smith",
-            "birth_date": "2021-12-26"
+            "birth_date": "2021-12-29"
         }
     }
 ]
