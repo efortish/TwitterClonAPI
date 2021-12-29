@@ -12,7 +12,7 @@ tweets.json).
 		- 127.0.0.1:8000/docs : To use Swagger UI.
 		- 127.0.0.1:8000/redoc: To user Redoc UI. 
 
-- Open users.json and tweets.jason and play with the API as long you want.
+- Open users.json and tweets.json and play with the API as long you want.
 
 
 
