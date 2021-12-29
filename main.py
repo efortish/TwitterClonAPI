@@ -1,10 +1,9 @@
 #Python
-from os import path
 from uuid import UUID
 from datetime import date, datetime
 from typing import Optional, List
 import json
-from fastapi.param_functions import Form, Path
+
 
 #Pydantic
 
@@ -17,6 +16,7 @@ from pydantic import Field
 from fastapi import FastAPI, status, Body
 from pydantic.types import SecretStr
 from fastapi import HTTPException
+from fastapi.param_functions import Form, Path
 
 
 app = FastAPI()
