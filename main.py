@@ -282,6 +282,20 @@ def update_a_user(
     user_id: UUID = Path(...),
     user: User = Body (...)
 ):  
+
+    """
+    Update a User
+
+    This path operation updates user's information, even the user ID
+
+    Parameters:
+    - Response Body parameters:
+        - user_id: UUID -> user's id
+        - user: User -> User object wich contains first_name, last_name, date_of_birth, used_id and email
+
+    Returns a Json with User Json information with the new data given, sometimes its necesary do the execute twice to work  
+    
+    """
     user_id = str(user_id)
     user_dict = user.dict()
     user_dict["user_id"] = str(user_dict["user_id"])
