@@ -487,7 +487,8 @@ def Update_a_tweet(
 
     Parameters:
     - Response Body parameters:
-        - tweet: User -> User object wich contains first_name, last_name, date_of_birth, used_id and email
+        - tweet_id: str -> Tweet's ID 
+        - tweet: tweet -> tweet object wich contains first_name, last_name, date_of_birth, used_id and email
 
     Returns a Json with User Json information with the new data given, sometimes its necesary do the execute twice to work  
     
