@@ -1,7 +1,7 @@
 This project is a copy of the twitter API created with FastAPI, "requirements.txt" has
 all the libraries used, this is a simplify version of twitter API, has path operations like 
 create, update, delete and show users / tweets, this project is NOT connected to a database,
-it works directly with .Json files wich saves the information registered (users.json,
+it works directly with .Json files which saves the information registered (users.json,
 tweets.json). 
 
 - To initialize Swagger UI or Redoc UI, please:
