@@ -5,14 +5,14 @@ it works directly with .Json files which saves the information registered (users
 tweets.json). 
 
 - To initialize Swagger UI or Redoc UI, please:
-	- Be on your Venv where the requirements.txt was installed.
+	- Be on your Venv where the requirements.txt is installed.
 	- Run in console: 
 			 uvicorn main:app --reload        #This launches the application.
 	- Go to 127.0.0.1:8000 in your navigator (Google Chrome recomended):
 		- 127.0.0.1:8000/docs : To use Swagger UI.
 		- 127.0.0.1:8000/redoc: To use Redoc UI. 
 
-- Open users.json and tweets.json and play with the API as long you want.
+- Open users.json and tweets.json and play with the API as long as you want.
 
 
 
